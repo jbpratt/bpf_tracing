@@ -1,0 +1,34 @@
+[package]
+name = "bpf_tracing"
+version = "0.1.0"
+edition = '2018'
+
+[dependencies]
+cty = "0.2.1"
+redbpf-macros = { git = "https://github.com/redsift/redbpf" }
+redbpf-probes = { git = "https://github.com/redsift/redbpf" }
+
+[build-dependencies]
+cargo-bpf = { git = "https://github.com/redsift/redbpf" }
+
+[features]
+default = []
+probes = []
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "block_http"
+path = "src/block_http/main.rs"
+required-features = ["probes"]
+
+[[bin]]
+name = "trace_http"
+path = "src/trace_http/main.rs"
+required-features = ["probes"]
+
+[[bin]]
+name = "test"
+path = "src/test/main.rs"
+required-features = ["probes"]
